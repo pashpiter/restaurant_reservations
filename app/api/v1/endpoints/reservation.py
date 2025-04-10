@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from api.v1.validators import is_one_reservation
 from db.database import get_session
+from db.crud.reservation import reservation_crud
 from schemas.reservation import Reservation, ReservationCreate, ReservationRead
 
 router = APIRouter(prefix='/reservations')
@@ -11,7 +13,9 @@ router = APIRouter(prefix='/reservations')
 async def get_all_reservations(
     session: AsyncSession = Depends(get_session)
 ) -> list[Reservation]:
-    pass
+    reservations: list[Reservation] = await reservation_crud.get_all(session)
+    await is_one_reservation(reservations)
+    return reservations
 
 
 @router.post('/')
