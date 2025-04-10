@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -27,7 +29,7 @@ async def create_table(
     return table
 
 
-@router.delete('/{table_id}')
+@router.delete('/{table_id}', status_code=HTTPStatus.NO_CONTENT)
 async def delete_table(
     table_id: int,
     session: AsyncSession = Depends(get_session)
