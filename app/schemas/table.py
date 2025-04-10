@@ -8,7 +8,8 @@ class TableBase(SQLModel):
         schema_extra={'example': 'Table 1'}
     )
     seats: int = Field(
-        description='Количество мест за столом'
+        description='Количество мест за столом',
+        ge=1
     )
     location: str = Field(
         description='Располодение стола',
