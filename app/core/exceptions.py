@@ -11,3 +11,8 @@ class NoTables(HTTPException):
 class NoObjWithId(HTTPException):
     def __init__(self, message: str):
         super().__init__(HTTPStatus.BAD_REQUEST, message)
+
+
+class NoReservations(HTTPException):
+    def __init__(self, message: str):
+        super().__init__(HTTPStatus.BAD_REQUEST, message)
