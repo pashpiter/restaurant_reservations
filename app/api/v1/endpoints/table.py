@@ -23,7 +23,7 @@ async def create_table(
     table_create: TableCreate,
     session: AsyncSession = Depends(get_session)
 ) -> TableRead:
-    table = await table_crud.create(session, **table_create.model_dump())
+    table = await table_crud.create(session, table_create.model_dump())
     return table
 
 
