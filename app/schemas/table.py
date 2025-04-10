@@ -15,7 +15,7 @@ class TableBase(SQLModel):
     )
 
 
-class Table(TableBase):
+class Table(TableBase, table=True):
     id: int | None = Field(
         default=None, primary_key=True
     )

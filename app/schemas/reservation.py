@@ -17,7 +17,7 @@ class ReservationBase(SQLModel):
     )
 
 
-class Reservation(ReservationBase):
+class Reservation(ReservationBase, table=True):
     id: int | None = Field(
         default=None, primary_key=True
     )
