@@ -4,6 +4,7 @@ from sqlmodel import select
 
 from schemas.table import Table
 from schemas.reservation import Reservation
+from db.validators import is_obj
 
 
 class CRUDBase:
@@ -37,6 +38,6 @@ class CRUDBase:
             self, session: AsyncSession, id: int
     ) -> None:
         db_obj = await self.get(session, id)
-        if db_obj:
-            await session.delete(db_obj)
-            await session.commit()
+        await is_obj(db_obj)
+        await session.delete(db_obj)
+        await session.commit()
