@@ -4,6 +4,7 @@ from sqlmodel import Field, SQLModel
 class TableBase(SQLModel):
     name: str = Field(
         description='Название стола',
+        unique=True,
         schema_extra={'example': 'Table 1'}
     )
     seats: int = Field(
