@@ -18,10 +18,16 @@ class ReservationBase(SQLModel):
 
 
 class Reservation(ReservationBase):
-    id: int | None = Field(default=None, primary_key=True)
-    table_id: int = Field(foreign_key="table.id")
+    id: int | None = Field(
+        default=None, primary_key=True
+    )
+    table_id: int = Field(
+        foreign_key='table.id'
+    )
 
-    table: Table = Relationship(sa_relationship_kwargs={'lazy': 'joined'})
+    table: Table = Relationship(
+        sa_relationship_kwargs={'lazy': 'joined'}
+    )
 
 
 class ReservationCreate(ReservationBase):
