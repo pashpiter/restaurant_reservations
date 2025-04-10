@@ -26,4 +26,4 @@ class TableCreate(TableBase):
 
 
 class TableRead(TableBase):
-    pass
+    id: int
