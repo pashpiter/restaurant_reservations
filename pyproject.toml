@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "restaurant-reservations"
+version = "0.1.0"
+description = ""
+authors = ["Pavel Drovnin <pavel98rus@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.12"
+sqlmodel = "^0.0.24"
+uvicorn = "^0.34.0"
+asyncpg = "^0.30.0"
+pydantic-settings = "^2.8.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
