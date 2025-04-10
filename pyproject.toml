@@ -12,6 +12,7 @@ sqlmodel = "^0.0.24"
 uvicorn = "^0.34.0"
 asyncpg = "^0.30.0"
 pydantic-settings = "^2.8.1"
+alembic = "^1.15.2"
 
 [build-system]
 requires = ["poetry-core"]
