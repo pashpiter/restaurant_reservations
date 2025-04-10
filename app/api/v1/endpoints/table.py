@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from api.v1.validators import is_tables
 from db.database import get_session
 from db.crud.table import table_crud
 from schemas.table import TableCreate, TableRead
@@ -13,6 +14,7 @@ async def get_all_tables(
     session: AsyncSession = Depends(get_session)
 ) -> list[TableRead]:
     tables = await table_crud.get_all(session)
+    await is_tables(tables)
     return tables
 
 
