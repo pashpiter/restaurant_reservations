@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -26,9 +28,9 @@ async def create_reservation(
     pass
 
 
-@router.delete('/{reservation_id}')
+@router.delete('/{reservation_id}', status_code=HTTPStatus.NO_CONTENT)
 async def delete_reservation(
     reservation_id: int,
     session: AsyncSession = Depends(get_session)
 ) -> None:
-    pass
+    await reservation_crud.delete(session, reservation_id)
