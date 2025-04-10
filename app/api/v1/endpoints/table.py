@@ -14,7 +14,7 @@ async def get_all_tables(
     session: AsyncSession = Depends(get_session)
 ) -> list[TableRead]:
     tables = await table_crud.get_all(session)
-    await is_tables(tables)
+    await is_one_table(tables)
     return tables
 
 
