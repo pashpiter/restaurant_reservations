@@ -1,0 +1,27 @@
+
+services:
+
+  postgres:
+    image: postgres:13.0-alpine
+    hostname: ${POSTGRES_HOST}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - .env
+
+  app:
+    build:
+      dockerfile: app/Dockerfile
+    container_name: restaurant_reservations_app
+    hostname: ${FASTAPI_HOST}
+    ports:
+      - ${FASTAPI_PORT}:${FASTAPI_PORT}
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
