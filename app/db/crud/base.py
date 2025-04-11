@@ -29,7 +29,7 @@ class CRUDBase:
 
     async def get_all(
             self, session: AsyncSession
-    ) -> list[Reservation | Table]:
+    ) -> list[Reservation] | list[Table]:
         stmt = select(self.model)
         result: Result = await session.execute(stmt)
         return result.scalars().all()

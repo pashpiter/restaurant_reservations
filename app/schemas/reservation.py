@@ -31,7 +31,7 @@ class Reservation(ReservationBase, table=True):
 
 
 class ReservationCreate(ReservationBase):
-    pass
+    table_id: int
 
 
 class ReservationRead(ReservationBase):
