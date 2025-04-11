@@ -17,6 +17,7 @@ class CRUDReservation(CRUDBase):
             end: datetime,
             table_id: int
     ) -> list[Reservation | None]:
+        '''Получение пересечений существующих и новой брони из базы данных'''
         stmt = (
             select(Reservation)
             .where(Reservation.table_id == table_id)

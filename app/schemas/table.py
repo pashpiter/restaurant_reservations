@@ -12,7 +12,7 @@ class TableBase(SQLModel):
         ge=1
     )
     location: str = Field(
-        description='Располодение стола',
+        description='Расположение стола',
         schema_extra={'example': 'Зал у окна'}
     )
 

@@ -10,6 +10,7 @@ from schemas.reservation import ReservationCreate
 async def check_conflicts(
         session: AsyncSession, new_reservation: ReservationCreate
 ) -> None:
+    '''Проверяет на наличие пересечений существующих и новой брони'''
     start_time = new_reservation.reservation_time
     end_time = start_time + timedelta(
         minutes=new_reservation.duration_minutes

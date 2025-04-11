@@ -14,6 +14,7 @@ class CRUDBase:
     async def create(
             self, session: AsyncSession, obj_in: dict
     ) -> Reservation | Table:
+        '''Создает новую запись в базе данных'''
         db_obj = self.model(**obj_in)
         session.add(db_obj)
         await session.commit()
@@ -23,6 +24,7 @@ class CRUDBase:
     async def get(
             self, session: AsyncSession, id: int
     ) -> Reservation | Table:
+        '''Получение объекта из базы данных по ID'''
         stmt = select(self.model).where(self.model.id == id)
         result: Result = await session.execute(stmt)
         return result.scalars().first()
@@ -30,6 +32,7 @@ class CRUDBase:
     async def get_all(
             self, session: AsyncSession
     ) -> list[Reservation] | list[Table]:
+        '''Получение всех объектов модели мз базы данных'''
         stmt = select(self.model)
         result: Result = await session.execute(stmt)
         return result.scalars().all()
@@ -37,6 +40,7 @@ class CRUDBase:
     async def delete(
             self, session: AsyncSession, id: int
     ) -> None:
+        '''Удаление объекта из базы данных по ID'''
         db_obj = await self.get(session, id)
         await is_obj(db_obj)
         await session.delete(db_obj)
