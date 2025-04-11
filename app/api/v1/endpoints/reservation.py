@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.v1.utils import check_conflicts
-from api.v1.validators import is_one_obj
+from api.v1.validators import is_one_obj, is_past_time
 from db.crud.reservation import reservation_crud
 from db.database import get_session
 from schemas.reservation import Reservation, ReservationCreate, ReservationRead
@@ -29,6 +29,7 @@ async def create_reservation(
 ) -> ReservationRead:
     '''Проверяет на пересечение существующих и новой брони.
     Создает новую бронь в случае отсутсвия пересечений'''
+    await is_past_time(reservation_create.reservation_time)
     await check_conflicts(session, reservation_create)
     reservation = await reservation_crud.create(
         session, reservation_create.model_dump()

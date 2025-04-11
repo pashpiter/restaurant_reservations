@@ -1,11 +1,12 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 
-from core.exceptions import NoObj, ReservationConflict
+from core.exceptions import NoObj, ReservationConflict, PastTimeReservation
 from schemas.reservation import Reservation
 from schemas.table import Table
 
 NO_OBJ = 'Нет ни одного объекта'
 RESERVATATION_CONFLICT = 'Cтолик занят c {} до {}'
+PAST_TIME_RESERVATION = 'Нельзя забронировать столик в прошлом'
 
 
 async def is_one_obj(
@@ -29,3 +30,8 @@ async def is_reservation_conflict(
                 ) for r in reservations
             ]
         )
+
+
+async def is_past_time(dt: datetime) -> None:
+    if dt < datetime.now():
+        raise PastTimeReservation(PAST_TIME_RESERVATION)
