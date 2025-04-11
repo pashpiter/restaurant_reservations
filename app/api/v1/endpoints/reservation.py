@@ -1,9 +1,11 @@
+from datetime import timedelta, datetime
 from http import HTTPStatus
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.v1.validators import is_one_reservation
+from api.v1.utils import check_conflicts
 from db.database import get_session
 from db.crud.reservation import reservation_crud
 from schemas.reservation import Reservation, ReservationCreate, ReservationRead
@@ -25,7 +27,11 @@ async def create_reservation(
     reservation_create: ReservationCreate,
     session: AsyncSession = Depends(get_session)
 ) -> ReservationRead:
-    pass
+    await check_conflicts(session, reservation_create)
+    reservation = await reservation_crud.create(
+        session, reservation_create.model_dump()
+    )
+    return reservation
 
 
 @router.delete('/{reservation_id}', status_code=HTTPStatus.NO_CONTENT)
