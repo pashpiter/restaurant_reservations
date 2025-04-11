@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlmodel import select, func
+from sqlmodel import func, select
 
 from db.crud.base import CRUDBase
 from schemas.reservation import Reservation

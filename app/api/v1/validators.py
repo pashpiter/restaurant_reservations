@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from core.exceptions import NoTables, NoReservations, ReservationConflict
+from core.exceptions import NoReservations, NoTables, ReservationConflict
 from schemas.reservation import Reservation
 from schemas.table import Table
 

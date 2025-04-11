@@ -4,8 +4,8 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.v1.validators import is_one_table
-from db.database import get_session
 from db.crud.table import table_crud
+from db.database import get_session
 from schemas.table import TableCreate, TableRead
 
 router = APIRouter(prefix='/tables')

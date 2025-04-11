@@ -1,13 +1,12 @@
-from datetime import timedelta, datetime
 from http import HTTPStatus
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api.v1.validators import is_one_reservation
 from api.v1.utils import check_conflicts
-from db.database import get_session
+from api.v1.validators import is_one_reservation
 from db.crud.reservation import reservation_crud
+from db.database import get_session
 from schemas.reservation import Reservation, ReservationCreate, ReservationRead
 
 router = APIRouter(prefix='/reservations')

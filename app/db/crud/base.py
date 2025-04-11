@@ -2,9 +2,9 @@ from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import select
 
-from schemas.table import Table
-from schemas.reservation import Reservation
 from db.validators import is_obj
+from schemas.reservation import Reservation
+from schemas.table import Table
 
 
 class CRUDBase:
