@@ -1,6 +1,6 @@
 # restaurant_reservations
 
-#### Стек: Python, FastAPI, uvicorn, SQLModel, postgresql, asyncpg, pytest
+#### Стек: Python, FastAPI, uvicorn, SQLModel, postgresql, asyncpg, alembic, pytest
 
 ## О проекте
 Этот проект представляет собой веб-приложение(backend) для бронирования столиков в ресторане.
