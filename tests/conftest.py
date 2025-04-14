@@ -7,7 +7,7 @@ from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import (AsyncSession, async_sessionmaker,
                                     create_async_engine)
 from sqlalchemy_utils import create_database, database_exists, drop_database
-from sqlmodel import SQLModel
+from sqlmodel import SQLModel, text
 
 from core.config import settings
 from db.database import get_session
@@ -60,3 +60,16 @@ async def client_fixture(session: AsyncSession):
     ) as client:
         yield client
     app.dependency_overrides.clear()
+
+
+@pytest.fixture(autouse=True)
+async def clean_tables(session: AsyncSession):
+    """Автоматическая очистка таблиц перед каждым тестом"""
+    await session.execute(text('TRUNCATE TABLE "table" CASCADE'))
+    await session.commit()
+
+
+pytest_plugins = [
+    "tests.fixtures.tables",
+    "tests.fixtures.reservations"
+]
