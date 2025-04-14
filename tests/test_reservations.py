@@ -45,6 +45,23 @@ async def test_create_reservation(client: AsyncClient, test_table_one: Table):
 
 
 @pytest.mark.asyncio
+async def test_create_reservation_with_invalid_table(
+        client: AsyncClient,
+        test_table_one: Table
+):
+    input_data = {
+        'customer_name': 'Dwayne Johnson',
+        'reservation_time': (
+            datetime.now() + timedelta(minutes=2)
+        ).isoformat(),
+        'duration_minutes': 30,
+        'table_id': 10
+        }
+    response = await client.post('/v1/reservations/', json=input_data)
+    assert response.status_code == 400
+
+
+@pytest.mark.asyncio
 async def test_create_crossed_reservation(
         client: AsyncClient,
         test_table_one: Table,
@@ -66,8 +83,8 @@ async def test_create_crossed_reservation(
 
 @pytest.mark.asyncio
 async def test_delete_reservation(
-    client: AsyncClient,
-    test_reservation: Reservation
+        client: AsyncClient,
+        test_reservation: Reservation
 ):
     response = await client.delete(f'/v1/reservations/{test_reservation.id}')
     assert response.status_code == 204
