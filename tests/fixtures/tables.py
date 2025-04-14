@@ -6,7 +6,7 @@ from schemas.table import Table
 
 @pytest.fixture(scope='function')
 async def test_table_one(session: AsyncSession):
-    """Фикстура тестового стола"""
+    '''Фикстура тестового стола'''
     table = Table(
         name='Table1',
         seats=2,
@@ -20,7 +20,7 @@ async def test_table_one(session: AsyncSession):
 
 @pytest.fixture(scope='function')
 async def test_table_two(session: AsyncSession):
-    """Фикстура тестового стола"""
+    '''Фикстура тестового стола'''
     table = Table(
         name='Table2',
         seats=4,

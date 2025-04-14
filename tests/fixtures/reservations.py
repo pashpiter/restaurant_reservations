@@ -9,10 +9,10 @@ from schemas.table import Table
 
 @pytest.fixture
 async def test_reservation(session: AsyncSession, test_table_one: Table):
-    """Фикстура тестового бронирования"""
+    '''Фикстура тестового бронирования'''
     reservation = Reservation(
         table_id=test_table_one.id,
-        customer_name="Никита Литвинков",
+        customer_name='Никита Литвинков',
         reservation_time=datetime.now(),
         duration_minutes=120
     )

@@ -20,13 +20,13 @@ ASYNC_TEST_DB_URL = settings.postgres.postgres_url + '_test'
 SYNC_TEST_DB_URL = ASYNC_TEST_DB_URL.replace('+asyncpg', '')
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope='session')
 def event_loop():
     loop = asyncio.get_event_loop_policy().get_event_loop()
     yield loop
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope='session')
 def setup_test_db():
     if not database_exists(SYNC_TEST_DB_URL):
         create_database(SYNC_TEST_DB_URL)
@@ -56,7 +56,7 @@ async def client_fixture(session: AsyncSession):
         return session
     app.dependency_overrides[get_session] = get_session_override
     async with AsyncClient(
-        transport=ASGITransport(app=app), base_url="http://test"
+        transport=ASGITransport(app=app), base_url='http://test'
     ) as client:
         yield client
     app.dependency_overrides.clear()
@@ -64,12 +64,12 @@ async def client_fixture(session: AsyncSession):
 
 @pytest.fixture(autouse=True)
 async def clean_tables(session: AsyncSession):
-    """Автоматическая очистка таблиц перед каждым тестом"""
+    '''Автоматическая очистка таблиц перед каждым тестом'''
     await session.execute(text('TRUNCATE TABLE "table" CASCADE'))
     await session.commit()
 
 
 pytest_plugins = [
-    "tests.fixtures.tables",
-    "tests.fixtures.reservations"
+    'tests.fixtures.tables',
+    'tests.fixtures.reservations'
 ]
