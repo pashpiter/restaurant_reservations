@@ -13,7 +13,8 @@ class ReservationBase(SQLModel):
         description='Время начала брони'
     )
     duration_minutes: int = Field(
-        description='Продолжительность брони в минутах'
+        description='Продолжительность брони в минутах',
+        ge=15
     )
 
 
