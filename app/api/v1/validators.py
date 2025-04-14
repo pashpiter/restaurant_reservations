@@ -4,7 +4,7 @@ from core.exceptions import NoObj, ReservationConflict, PastTimeReservation
 from schemas.reservation import Reservation
 from schemas.table import Table
 
-NO_OBJ = 'Нет ни одного объекта'
+NO_OBJ = 'Объект не найден'
 RESERVATATION_CONFLICT = 'Cтолик занят c {} до {}'
 PAST_TIME_RESERVATION = 'Нельзя забронировать столик в прошлом'
 
