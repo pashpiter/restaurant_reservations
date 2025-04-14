@@ -22,7 +22,7 @@ async def get_all_reservations(
     return reservations
 
 
-@router.post('/')
+@router.post('/', status_code=HTTPStatus.CREATED)
 async def create_reservation(
     reservation_create: ReservationCreate,
     session: AsyncSession = Depends(get_session)

@@ -21,7 +21,7 @@ async def get_all_tables(
     return tables
 
 
-@router.post('/')
+@router.post('/', status_code=HTTPStatus.CREATED)
 async def create_table(
     table_create: TableCreate,
     session: AsyncSession = Depends(get_session)
